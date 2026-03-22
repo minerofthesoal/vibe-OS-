@@ -1,0 +1,11 @@
+[SddmGreeterTheme]
+Name=vibeOS
+Description=vibeOS Login Theme - macOS Ventura inspired
+Author=vibeOS
+Version=1.0
+Website=https://github.com/minerofthesoal/vibe-OS-
+Screenshot=preview.png
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Type=sddm-theme

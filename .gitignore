@@ -1,0 +1,26 @@
+# Build output
+build/
+*.iso
+*.qcow2
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+*.spec
+
+# Node (legacy)
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

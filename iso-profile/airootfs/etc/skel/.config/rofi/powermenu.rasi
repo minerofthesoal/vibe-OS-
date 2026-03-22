@@ -1,0 +1,63 @@
+/* vibeOS Rofi Power Menu */
+configuration {
+    show-icons: false;
+}
+
+* {
+    font: "JetBrainsMono Nerd Font 28";
+    bg: rgba(17, 17, 27, 0.85);
+    fg: #cdd6f4;
+    accent: #89b4fa;
+    border-col: rgba(69, 71, 90, 0.6);
+    selected: rgba(137, 180, 250, 0.25);
+}
+
+window {
+    transparency: "real";
+    width: 500px;
+    location: center;
+    anchor: center;
+    border: 1px solid;
+    border-color: @border-col;
+    border-radius: 20px;
+    background-color: @bg;
+    padding: 20px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [ message, listview ];
+}
+
+message {
+    background-color: transparent;
+    margin: 0 0 16px 0;
+}
+
+textbox {
+    background-color: transparent;
+    text-color: @fg;
+    horizontal-align: 0.5;
+    font: "Inter 14";
+}
+
+listview {
+    background-color: transparent;
+    columns: 5;
+    lines: 1;
+    spacing: 16px;
+    padding: 0;
+}
+
+element {
+    background-color: transparent;
+    text-color: @fg;
+    padding: 20px 0;
+    border-radius: 14px;
+    horizontal-align: 0.5;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color: @accent;
+}
