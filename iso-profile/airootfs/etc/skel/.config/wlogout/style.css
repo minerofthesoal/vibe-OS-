@@ -1,0 +1,77 @@
+/* vibeOS wlogout - Catppuccin Mocha glassmorphism */
+
+* {
+    background-image: none;
+    font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 14px;
+}
+
+window {
+    background-color: rgba(17, 17, 27, 0.75);
+}
+
+button {
+    color: #cdd6f4;
+    background-color: rgba(30, 30, 46, 0.6);
+    border: 1px solid rgba(69, 71, 90, 0.5);
+    border-radius: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
+    margin: 8px;
+    transition: all 0.3s ease;
+}
+
+button:focus, button:active, button:hover {
+    background-color: rgba(137, 180, 250, 0.15);
+    border-color: rgba(137, 180, 250, 0.5);
+    outline-style: none;
+}
+
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"));
+}
+#lock:hover {
+    background-color: rgba(137, 180, 250, 0.2);
+    border-color: #89b4fa;
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"));
+}
+#logout:hover {
+    background-color: rgba(203, 166, 247, 0.2);
+    border-color: #cba6f7;
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"));
+}
+#shutdown:hover {
+    background-color: rgba(243, 139, 168, 0.2);
+    border-color: #f38ba8;
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"));
+}
+#reboot:hover {
+    background-color: rgba(166, 227, 161, 0.2);
+    border-color: #a6e3a1;
+}
+
+#suspend {
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"));
+}
+#suspend:hover {
+    background-color: rgba(249, 226, 175, 0.2);
+    border-color: #f9e2af;
+}
+
+#hibernate {
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"));
+}
+#hibernate:hover {
+    background-color: rgba(148, 226, 213, 0.2);
+    border-color: #94e2d5;
+}

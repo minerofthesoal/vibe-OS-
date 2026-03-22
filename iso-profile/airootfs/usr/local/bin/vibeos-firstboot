@@ -1,0 +1,50 @@
+#!/bin/bash
+# ==============================================================================
+# vibeOS - First Boot Setup
+# Runs once after installation to finalize system configuration
+# ==============================================================================
+
+set -euo pipefail
+
+LOG="/var/log/vibeos-firstboot.log"
+exec > >(tee -a "$LOG") 2>&1
+
+echo "[vibeOS] First boot setup starting at $(date)"
+
+# ── 1. Optimize pacman mirrors ──────────────────────────────
+if command -v reflector &>/dev/null; then
+    echo "[vibeOS] Optimizing mirror list..."
+    reflector --latest 10 --protocol https --sort rate \
+        --save /etc/pacman.d/mirrorlist 2>/dev/null || true
+fi
+
+# ── 2. Setup Flatpak ────────────────────────────────────────
+if command -v flatpak &>/dev/null; then
+    echo "[vibeOS] Configuring Flatpak..."
+    flatpak remote-add --if-not-exists flathub \
+        https://flathub.org/repo/flathub.flatpakrepo 2>/dev/null || true
+fi
+
+# ── 3. Update font cache ────────────────────────────────────
+echo "[vibeOS] Updating font cache..."
+fc-cache -f 2>/dev/null || true
+
+# ── 4. Generate locales if not done ─────────────────────────
+if [[ -f /etc/locale.gen ]]; then
+    locale-gen 2>/dev/null || true
+fi
+
+# ── 5. Set swww cache permissions for all users ─────────────
+for user_home in /home/*; do
+    if [[ -d "$user_home" ]]; then
+        user=$(basename "$user_home")
+        mkdir -p "$user_home/.cache/swww"
+        chown -R "$user:$user" "$user_home/.cache/swww" 2>/dev/null || true
+    fi
+done
+
+# ── 6. Mark first boot as done ──────────────────────────────
+mkdir -p /var/lib/vibeos
+touch /var/lib/vibeos/.firstboot-done
+
+echo "[vibeOS] First boot setup completed at $(date)"

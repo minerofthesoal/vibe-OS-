@@ -90,6 +90,7 @@ systemctl enable NetworkManager
 systemctl enable bluetooth
 systemctl enable sddm
 systemctl enable fstrim.timer
+systemctl enable vibeos-firstboot.service 2>/dev/null || true
 
 # PipeWire is user-level, enabled by default via socket activation
 

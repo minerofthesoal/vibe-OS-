@@ -125,6 +125,19 @@ exec python3 main.py "$@"
 LAUNCHER
 chmod +x "$AIROOTFS/usr/local/bin/vibeos-installer"
 
+# Copy first-boot service
+if [[ -f "$PROFILE_DIR/airootfs/etc/systemd/system/vibeos-firstboot.service" ]]; then
+    mkdir -p "$AIROOTFS/etc/systemd/system"
+    cp "$PROFILE_DIR/airootfs/etc/systemd/system/vibeos-firstboot.service" \
+        "$AIROOTFS/etc/systemd/system/"
+fi
+
+if [[ -f "$PROFILE_DIR/airootfs/usr/local/bin/vibeos-firstboot" ]]; then
+    cp "$PROFILE_DIR/airootfs/usr/local/bin/vibeos-firstboot" \
+        "$AIROOTFS/usr/local/bin/"
+    chmod +x "$AIROOTFS/usr/local/bin/vibeos-firstboot"
+fi
+
 # ── Live environment configuration ───────────────────────────
 log_info "Configuring live environment..."
 
