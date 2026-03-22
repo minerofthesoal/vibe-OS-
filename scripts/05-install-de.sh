@@ -38,6 +38,11 @@ if [[ -f /etc/skel/.gtkrc-2.0 ]]; then
     cp /etc/skel/.gtkrc-2.0 "$USER_HOME/.gtkrc-2.0"
 fi
 
+# ── 1b. Remove live environment overrides ─────────────────────
+# Replace the live-environment autostart with an empty overrides file
+echo "# vibeOS user overrides (add custom Hyprland settings here)" \
+    > "$USER_HOME/.config/hypr/overrides.conf"
+
 # ── 2. SDDM Theme ────────────────────────────────────────────
 log_info "Configuring SDDM login theme..."
 mkdir -p /etc/sddm.conf.d
@@ -154,5 +159,47 @@ alias vim='nvim'
 EOF
 
 chown "$USERNAME:$USERNAME" "$USER_HOME/.bashrc"
+
+# ── 8. First-boot service ────────────────────────────────────
+log_info "Installing first-boot service..."
+if [[ -f "$VIBEOS_SRC/scripts/../iso-profile/airootfs/etc/systemd/system/vibeos-firstboot.service" ]] 2>/dev/null; then
+    cp "$VIBEOS_SRC/scripts/../iso-profile/airootfs/etc/systemd/system/vibeos-firstboot.service" \
+       /etc/systemd/system/ 2>/dev/null || true
+fi
+# The firstboot script and service are deployed via build.sh into the ISO
+# and will be available in the chroot after pacstrap copies the overlay
+cat > /usr/local/bin/vibeos-firstboot <<'FIRSTBOOT'
+#!/bin/bash
+set -euo pipefail
+LOG="/var/log/vibeos-firstboot.log"
+exec > >(tee -a "$LOG") 2>&1
+echo "[vibeOS] First boot setup starting at $(date)"
+command -v reflector &>/dev/null && reflector --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist 2>/dev/null || true
+command -v flatpak &>/dev/null && flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo 2>/dev/null || true
+fc-cache -f 2>/dev/null || true
+locale-gen 2>/dev/null || true
+for user_home in /home/*; do
+    [ -d "$user_home" ] && mkdir -p "$user_home/.cache/swww" && chown "$(basename "$user_home"):$(basename "$user_home")" "$user_home/.cache/swww" 2>/dev/null || true
+done
+mkdir -p /var/lib/vibeos && touch /var/lib/vibeos/.firstboot-done
+echo "[vibeOS] First boot setup completed at $(date)"
+FIRSTBOOT
+chmod +x /usr/local/bin/vibeos-firstboot
+
+cat > /etc/systemd/system/vibeos-firstboot.service <<'UNIT'
+[Unit]
+Description=vibeOS First Boot Setup
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=!/var/lib/vibeos/.firstboot-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/vibeos-firstboot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+UNIT
 
 log_success "vibeOS Desktop Environment installed!"
