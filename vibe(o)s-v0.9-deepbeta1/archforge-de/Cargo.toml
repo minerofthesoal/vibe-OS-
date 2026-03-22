@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "compositor",
+]
+resolver = "2"

@@ -1,0 +1,5 @@
+{
+  "name": "vibe(O)s v0.9-deepbeta1",
+  "description": "A custom Wayland Desktop Environment and OS installer built from scratch in Rust, featuring fluid macOS-like animations, ReviOS tiling, and a custom programming language called CRust.",
+  "requestFramePermissions": []
+}
