@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=vibeOS
+Comment=vibeOS Desktop Environment (Hyprland)
+Exec=Hyprland
+Type=Application
+DesktopNames=Hyprland

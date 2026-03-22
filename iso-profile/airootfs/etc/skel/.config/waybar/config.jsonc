@@ -1,0 +1,171 @@
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  vibeOS Waybar - macOS Ventura × Win11 × KDE hybrid bar   ║
+// ╚══════════════════════════════════════════════════════════════╝
+{
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "margin-top": 4,
+    "margin-left": 8,
+    "margin-right": 8,
+    "spacing": 0,
+    "reload_style_on_change": true,
+
+    "modules-left": [
+        "custom/logo",
+        "hyprland/workspaces",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "custom/separator",
+        "network",
+        "bluetooth",
+        "pulseaudio",
+        "backlight",
+        "battery",
+        "custom/separator",
+        "custom/notification",
+        "custom/power"
+    ],
+
+    // ── Left Modules ──
+    "custom/logo": {
+        "format": "  ",
+        "tooltip": false,
+        "on-click": "rofi -show drun -theme ~/.config/rofi/launcher.rasi"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "active": "",
+            "default": ""
+        },
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
+        "active-only": false,
+        "sort-by-number": true
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 40,
+        "separate-outputs": true,
+        "rewrite": {
+            "(.*) — Mozilla Firefox": " $1",
+            "(.*) - kitty": " $1",
+            "(.*) - Thunar": "󰉋 $1",
+            "(.*) — Visual Studio Code": "󰨞 $1"
+        }
+    },
+
+    // ── Center ──
+    "clock": {
+        "format": "{:%a %b %d  %I:%M %p}",
+        "format-alt": "{:%A, %B %d, %Y  %I:%M:%S %p}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#cba6f7'><b>{}</b></span>",
+                "days": "<span color='#cdd6f4'>{}</span>",
+                "weeks": "<span color='#7f849c'>W{}</span>",
+                "weekdays": "<span color='#89b4fa'><b>{}</b></span>",
+                "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+
+    // ── Right Modules ──
+    "tray": {
+        "icon-size": 16,
+        "spacing": 8
+    },
+
+    "custom/separator": {
+        "format": "|",
+        "tooltip": false
+    },
+
+    "network": {
+        "format-wifi": "󰤨 {signalStrength}%",
+        "format-ethernet": "󰈁",
+        "format-disconnected": "󰤭",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
+        "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
+        "on-click": "nm-connection-editor"
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-connected": "󰂱 {device_alias}",
+        "format-disabled": "󰂲",
+        "tooltip-format": "{controller_alias}\n{num_connections} connected",
+        "on-click": "blueman-manager"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "󰂰 {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": {
+            "headphone": "󰋋",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol",
+        "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "scroll-step": 5
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "tooltip-format": "Brightness: {percent}%",
+        "on-scroll-up": "brightnessctl s +5%",
+        "on-scroll-down": "brightnessctl s 5%-"
+    },
+
+    "battery": {
+        "states": {
+            "good": 80,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰚥 {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip-format": "{timeTo}\n{power} W"
+    },
+
+    "custom/notification": {
+        "tooltip": false,
+        "format": "󰂚",
+        "on-click": "swaync-client -t -sw",
+        "escape": true
+    },
+
+    "custom/power": {
+        "format": "⏻",
+        "tooltip": false,
+        "on-click": "wlogout -p layer-shell"
+    }
+}

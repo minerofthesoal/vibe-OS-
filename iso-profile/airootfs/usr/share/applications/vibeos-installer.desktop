@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=vibeOS Installer
+Comment=Install vibeOS to your system
+Exec=vibeos-installer
+Icon=system-software-install
+Terminal=false
+Type=Application
+Categories=System;
+StartupWMClass=vibeOS-installer

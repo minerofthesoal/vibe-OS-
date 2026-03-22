@@ -1,0 +1,164 @@
+# ============================================================================
+# vibeOS - Package List for Live ISO
+# ============================================================================
+
+# --- Base System ---
+base
+base-devel
+linux
+linux-firmware
+linux-headers
+mkinitcpio
+mkinitcpio-archiso
+archlinux-keyring
+syslinux
+
+# --- Boot ---
+grub
+efibootmgr
+os-prober
+
+# --- Filesystem ---
+btrfs-progs
+dosfstools
+e2fsprogs
+exfatprogs
+ntfs-3g
+gptfdisk
+parted
+
+# --- Networking ---
+networkmanager
+network-manager-applet
+iwd
+wpa_supplicant
+wireless_tools
+dhcpcd
+openssh
+curl
+wget
+dnsutils
+
+# --- Bluetooth ---
+bluez
+bluez-utils
+blueman
+
+# --- Audio (PipeWire) ---
+pipewire
+pipewire-alsa
+pipewire-pulse
+pipewire-jack
+wireplumber
+pavucontrol
+playerctl
+
+# --- Wayland Compositor ---
+hyprland
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+xdg-desktop-portal
+xorg-xwayland
+qt5-wayland
+qt6-wayland
+
+# --- Desktop Shell Components ---
+waybar
+rofi-wayland
+swaync
+swww
+hyprpaper
+hyprlock
+hypridle
+wlogout
+nwg-dock-hyprland
+cliphist
+wl-clipboard
+
+# --- Display Manager ---
+sddm
+qt5-graphicaleffects
+qt5-quickcontrols2
+qt5-svg
+
+# --- GTK/Qt Theming ---
+nwg-look
+qt5ct
+kvantum
+kvantum-qt5
+papirus-icon-theme
+ttf-jetbrains-mono-nerd
+ttf-font-awesome
+noto-fonts
+noto-fonts-emoji
+noto-fonts-cjk
+inter-font
+
+# --- File Manager ---
+thunar
+thunar-archive-plugin
+thunar-volman
+tumbler
+ffmpegthumbnailer
+gvfs
+gvfs-mtp
+gvfs-nfs
+gvfs-smb
+file-roller
+
+# --- Terminal ---
+kitty
+
+# --- Browser ---
+firefox
+
+# --- Screenshot / Screen ---
+grim
+slurp
+swappy
+brightnessctl
+
+# --- System Utilities ---
+polkit-kde-agent
+gnome-keyring
+fastfetch
+htop
+btop
+neovim
+git
+zip
+unzip
+p7zip
+man-db
+man-pages
+xdg-utils
+xdg-user-dirs
+
+# --- Python (for installer & apps) ---
+python
+python-pip
+python-gobject
+python-psutil
+tk
+
+# --- GPU Support (base) ---
+mesa
+vulkan-icd-loader
+libva-mesa-driver
+mesa-vdpau
+
+# --- VM Guest Support ---
+qemu-guest-agent
+open-vm-tools
+virtualbox-guest-utils-nox
+spice-vdagent
+
+# --- Flatpak ---
+flatpak
+
+# --- Misc ---
+imagemagick
+jq
+rsync
+reflector
+pacman-contrib
